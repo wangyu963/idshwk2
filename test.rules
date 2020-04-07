@@ -1,2 +1,2 @@
-alert tcp any any -> any 3399 (content:"login";content:"Initial";msg:"bot founded";sid:1000001)
-alert tcp any any -> any 3399 (content:"IPv4Address:Port";msg:"bot founded";sid:1000001)
+alert tcp any any -> any 3399 (msg:"First packet";flow:established;content:"login";nocase;content:"Initial";nocase;flowbits:set,is_bot;flowbits:noalert;sid:1000002)
+alert tcp any any -> any 3399 (msg:"bot founded";flowbits:isset,is_bot;flow:established;pcre:"/\d+\.\d+\.\d+\.\d+\x3a\d+/i";sid:1000001;)
